@@ -8,14 +8,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.devsuperior.desafio_aula.entities.Pedido;
-import com.devsuperior.desafio_aula.services.PedidoService;
+import com.devsuperior.desafio_aula.entities.Order;
+import com.devsuperior.desafio_aula.services.OrderService;
 
 @SpringBootApplication
 public class DesafioAulaApplication implements CommandLineRunner {
 
     @Autowired
-    private PedidoService pedidoService;
+    private OrderService pedidoService;
 
     public static void main(String[] args) {
         Locale.setDefault(new Locale("pt", "BR"));
@@ -27,24 +27,24 @@ public class DesafioAulaApplication implements CommandLineRunner {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            Pedido pedido = new Pedido();
+            Order order = new Order();
 
             System.out.print("Digite o código do pedido: ");
-            Long codigo = scanner.nextLong();
-            pedido.setCodigo(codigo);
+            Long code = scanner.nextLong();
+            order.setCode(code);
 
             System.out.print("Digite o valor básico do pedido: ");
-            Double valorBasico = scanner.nextDouble();
-            pedido.setValorBasico(valorBasico);
+            Double basic = scanner.nextDouble();
+            order.setBasic(basic);
 
             System.out.print("Digite o valor de desconto do pedido: ");
-            Double valorDesconto = scanner.nextDouble();
-            pedido.setValorDesconto(valorDesconto);
+            Double discount = scanner.nextDouble();
+            order.setDiscount(discount);
 
-            Double total = pedidoService.calcularTotalPedido(pedido);
+            Double total = pedidoService.total(order);
 
             System.out.println("Pedido criado com sucesso!");
-            System.out.println("Código: " + pedido.getCodigo());
+            System.out.println("Código: " + order.getCode());
             System.out.println("Valor Total: " + total);
 
             System.out.print("Deseja calcular outro pedido? (s/n): ");
